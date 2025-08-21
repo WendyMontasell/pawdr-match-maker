@@ -1,9 +1,41 @@
 import { PawdrLogo } from '@/components/PawdrLogo';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { PetSwiper } from '@/components/PetSwiper';
+import { useEffect, useState } from 'react';
 
 const Welcome = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [matchedPets, setMatchedPets] = useState(null);
+
+  useEffect(() => {
+    if (location.state?.matchedPets) {
+      setMatchedPets(location.state.matchedPets);
+    }
+  }, [location.state]);
+
+  // If we have matched pets, show the swiper
+  if (matchedPets && matchedPets.length > 0) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col p-6">
+        <div className="w-full max-w-sm mx-auto space-y-6">
+          {/* Header */}
+          <div className="flex items-center justify-center pt-4 pb-2">
+            <PawdrLogo size="sm" />
+          </div>
+          
+          {/* Swiper */}
+          <PetSwiper pets={matchedPets} />
+          
+          {/* Footer info */}
+          <div className="text-center text-sm text-muted-foreground">
+            {matchedPets.length} pet{matchedPets.length > 1 ? 's' : ''} found based on your preferences
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
