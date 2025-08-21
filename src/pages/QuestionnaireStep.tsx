@@ -3,6 +3,8 @@ import { ProgressBar } from '@/components/ProgressBar';
 import { Button } from '@/components/ui/button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useQuestionnaire } from '@/hooks/useQuestionnaire';
+import { saveQuestionnaireResponse } from '@/services/questionnaireService';
 import dogSample from '@/assets/dog-sample.jpg';
 import catSample from '@/assets/cat-sample.jpg';
 import eitherSample from '@/assets/either-sample.jpg';
@@ -51,15 +53,44 @@ const QuestionnaireStep = () => {
   const { step } = useParams<{ step: string }>();
   const currentStep = parseInt(step || '1');
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const { responses, updateResponse, isComplete } = useQuestionnaire();
   
   const question = questions[currentStep - 1];
   const isLastStep = currentStep === questions.length;
   
-  const handleNext = () => {
+  const handleNext = async () => {
     if (selectedOption === null) return;
     
+    // Update the response for this question
+    updateResponse(currentStep, selectedOption);
+    
     if (isLastStep) {
-      navigate('/matching');
+      // Save all responses to database and navigate to matching
+      try {
+        const finalResponses = { ...responses };
+        // Apply the final answer
+        switch (currentStep) {
+          case 1:
+            finalResponses.q_outdoor_pref = selectedOption;
+            break;
+          case 2:
+            finalResponses.q_pets = selectedOption;
+            break;
+          case 3:
+            finalResponses.q_experience_level = selectedOption;
+            break;
+          case 4:
+            finalResponses.q_preference = selectedOption === 0 ? false : selectedOption === 1 ? true : null;
+            break;
+        }
+        
+        await saveQuestionnaireResponse(finalResponses);
+        navigate('/matching', { state: { responses: finalResponses } });
+      } catch (error) {
+        console.error('Error saving responses:', error);
+        // Still navigate, but without saving
+        navigate('/matching');
+      }
     } else {
       navigate(`/questionnaire/${currentStep + 1}`);
     }
