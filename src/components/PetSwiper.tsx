@@ -48,14 +48,16 @@ const PetSwiper = ({ pets }: PetSwiperProps) => {
         }}
         className="w-full"
       >
-        <CarouselContent className="-ml-2 md:-ml-4">
+        <CarouselContent className="-ml-1">
           {activePets.map((pet) => (
-            <CarouselItem key={pet.id} className="pl-2 md:pl-4">
-              <PetCard
-                pet={pet}
-                onLike={handleLike}
-                onPass={handlePass}
-              />
+            <CarouselItem key={pet.id} className="pl-1">
+              <div className="p-1">
+                <PetCard
+                  pet={pet}
+                  onLike={handleLike}
+                  onPass={handlePass}
+                />
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>

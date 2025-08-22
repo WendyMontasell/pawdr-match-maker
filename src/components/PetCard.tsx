@@ -49,17 +49,22 @@ const PetCard = ({ pet, onLike, onPass }: PetCardProps) => {
 
   return (
     <Card className="w-full max-w-sm mx-auto bg-card rounded-2xl overflow-hidden border-0 shadow-lg">
-      {/* Tags */}
-      <div className="flex gap-2 p-4 pb-0">
-        <Badge variant="secondary" className="rounded-full px-3 py-1 text-xs font-medium">
-          {getLocationTag()}
-        </Badge>
-        <Badge variant="secondary" className="rounded-full px-3 py-1 text-xs font-medium">
-          {getEnergyTag(pet.energy_level)}
-        </Badge>
-        <Badge variant="secondary" className="rounded-full px-3 py-1 text-xs font-medium">
-          {getKidsTag()}
-        </Badge>
+      {/* Top Action Buttons */}
+      <div className="flex justify-between items-center p-4 pb-0">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+        >
+          Watch video
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+        >
+          View profile
+        </Button>
       </div>
 
       {/* Pet Image */}
