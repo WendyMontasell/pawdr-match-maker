@@ -23,6 +23,7 @@ export type Database = {
           q_pets: number | null
           q_preference: boolean | null
           q_time_at_home: number | null
+          user_id: string | null
         }
         Insert: {
           id?: string
@@ -32,6 +33,7 @@ export type Database = {
           q_pets?: number | null
           q_preference?: boolean | null
           q_time_at_home?: number | null
+          user_id?: string | null
         }
         Update: {
           id?: string
@@ -41,6 +43,7 @@ export type Database = {
           q_pets?: number | null
           q_preference?: boolean | null
           q_time_at_home?: number | null
+          user_id?: string | null
         }
         Relationships: []
       }
