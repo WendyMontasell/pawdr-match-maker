@@ -101,10 +101,10 @@ const PetCard = ({ pet, onLike, onPass }: PetCardProps) => {
         
         <Button
           size="lg"
-          className="w-16 h-16 rounded-full bg-pink-500 hover:bg-pink-600"
+          className="w-16 h-16 rounded-full bg-primary hover:bg-primary-hover"
           onClick={() => onLike(pet.id)}
         >
-          <Heart className="w-6 h-6 text-white fill-white" />
+          <Heart className="w-6 h-6 text-primary-foreground fill-primary-foreground" />
         </Button>
       </div>
     </Card>
