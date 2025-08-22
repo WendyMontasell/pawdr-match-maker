@@ -16,22 +16,25 @@ const Matching = () => {
         if (responses) {
           const pets = await findMatchingPets(responses);
           setMatchingPets(pets);
+          
+          // Navigate after finding matches
+          setTimeout(() => {
+            navigate('/', { state: { matchedPets: pets } });
+          }, 2000);
         }
       } catch (error) {
         console.error('Error finding matches:', error);
+        // Navigate even on error
+        setTimeout(() => {
+          navigate('/', { state: { matchedPets: [] } });
+        }, 2000);
       } finally {
         setIsLoading(false);
       }
     };
 
     findMatches();
-    
-    const timer = setTimeout(() => {
-      navigate('/', { state: { matchedPets: matchingPets } });
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [navigate, location.state, matchingPets]);
+  }, [navigate, location.state]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
@@ -47,12 +50,10 @@ const Matching = () => {
             {isLoading ? 'Finding your perfect match...' : `Found ${matchingPets.length} perfect matches!`}
           </h2>
           
-          {/* Loading dots animation */}
+          {/* Circular loading animation */}
           {isLoading && (
-            <div className="flex justify-center items-center space-x-1">
-              <div className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-              <div className="w-2 h-2 bg-primary rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-              <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+            <div className="flex justify-center">
+              <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
             </div>
           )}
         </div>
