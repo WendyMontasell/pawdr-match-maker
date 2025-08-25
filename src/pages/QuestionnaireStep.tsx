@@ -30,11 +30,11 @@ const questions = [
   },
   {
     id: 3,
-    title: "What are you hoping for in your new companion?",
+    title: "Have you had pets before?",
     options: [
-      "Fun, adventures and play",
-      "Taking care of it and enjoying its company",
-      "Knowing their personality"
+      "No",
+      "Yes",
+      "Yes, and they had special needs"
     ]
   },
   {
