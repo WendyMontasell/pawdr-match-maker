@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 export interface QuestionnaireResponses {
   q_outdoor_pref: number; // Question 1: Active/outdoorsy (0=home, 1=sometimes, 2=yes)
   q_pets: number; // Question 2: Already have pets (0=none, 1=need time, 2=friendly)
-  q_experience_level: number; // Question 3: What hoping for (0=personality, 1=care, 2=fun)
+  q_experience_level: number; // Question 3: What hoping for (0=fun, 1=care, 2=personality)
   q_preference: boolean | null; // Question 4: Cat/Dog preference (false=cat, true=dog, null=either)
 }
 
@@ -45,6 +45,16 @@ export const findMatchingPets = async (responses: QuestionnaireResponses) => {
     if (responses.q_pets > 0) {
       query = query.gte('good_with_pets', 1);
     }
+    
+    // Filter by ease of care based on what they're hoping for
+    if (responses.q_experience_level === 0) {
+      // Fun, adventures and play - prefer easier care pets
+      query = query.lte('ease_of_care', 1);
+    } else if (responses.q_experience_level === 1) {
+      // Taking care of it and enjoying its company - prefer pets that need more care
+      query = query.gte('ease_of_care', 2);
+    }
+    // For "Knowing their personality" (index 2), no care filter applied
     
     const { data, error } = await query;
     
