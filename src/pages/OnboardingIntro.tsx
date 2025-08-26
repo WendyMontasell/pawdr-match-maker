@@ -1,4 +1,4 @@
-import { PawdrLogo } from '@/components/PawdrLogo';
+import { Logo } from '@/components/Logo';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const OnboardingIntro = () => {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-sm mx-auto text-center space-y-8">
         {/* Logo */}
-        <PawdrLogo size="md" />
+        <Logo size={64} color="#FF4F7B" />
         
         {/* Profile Photos */}
         <div className="relative flex justify-center items-center h-32">

@@ -1,4 +1,4 @@
-import { PawdrLogo } from '@/components/PawdrLogo';
+import { Logo } from '@/components/Logo';
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { findMatchingPets } from '@/services/questionnaireService';
@@ -41,7 +41,7 @@ const Matching = () => {
       <div className="w-full max-w-sm mx-auto text-center space-y-8">
         {/* Logo with animation */}
         <div className="animate-pulse">
-          <PawdrLogo size="lg" />
+          <Logo size={96} color="#FF4F7B" />
         </div>
         
         {/* Loading message */}

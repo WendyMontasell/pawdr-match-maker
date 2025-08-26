@@ -1,4 +1,4 @@
-import { PawdrLogo } from '@/components/PawdrLogo';
+import { Logo } from '@/components/Logo';
 import { Button } from '@/components/ui/button';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { PetSwiper } from '@/components/PetSwiper';
@@ -22,7 +22,7 @@ const Welcome = () => {
         <div className="w-full max-w-sm mx-auto space-y-6">
           {/* Header */}
           <div className="flex items-center justify-center pt-4 pb-2">
-            <PawdrLogo size="sm" />
+            <Logo size={32} color="#FF4F7B" />
           </div>
           
           {/* Swiper */}
@@ -41,7 +41,7 @@ const Welcome = () => {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
       <div className="w-full max-w-sm mx-auto text-center space-y-8">
         {/* Logo */}
-        <PawdrLogo size="lg" />
+        <Logo size={96} color="#FF4F7B" />
         
         {/* Main Content */}
         <div className="space-y-6">
