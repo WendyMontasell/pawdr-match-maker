@@ -129,7 +129,7 @@ All colors MUST be HSL.
   small { @apply text-sm; }
   
   /* Global component defaults */
-  .btn { @apply rounded-xl px-4 py-2 font-medium transition-colors; }
-  .card { @apply rounded-xl border bg-card text-card-foreground shadow-sm; }
-  .input { @apply rounded-xl border border-input bg-background px-3 py-2; }
+  .btn { @apply rounded-xl px-6 py-3 font-medium transition-all duration-200; }
+  .card { @apply rounded-xl border bg-card text-card-foreground shadow-md; }
+  .input { @apply w-full rounded-xl border border-input bg-background px-4 py-3; }
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Card, CardContent } from '@/components/ui/card';
 import { PetCard, Pet } from '@/components/PetCard';
 
 interface PetSwiperProps {
@@ -27,20 +28,24 @@ const PetSwiper = ({ pets }: PetSwiperProps) => {
 
   if (activePets.length === 0) {
     return (
-      <div className="text-center py-12">
-        <h3 className="text-xl font-semibold mb-2">No more pets to show!</h3>
-        <p className="text-muted-foreground">
-          {likedPets.length > 0 
-            ? `You liked ${likedPets.length} pet${likedPets.length > 1 ? 's' : ''}!`
-            : 'Try adjusting your preferences to see more pets.'
-          }
-        </p>
+      <div className="w-full max-w-md mx-auto">
+        <Card className="shadow-md">
+          <CardContent className="p-8 text-center space-y-4">
+            <h3 className="text-xl font-semibold">No more pets to show!</h3>
+            <p className="text-muted-foreground">
+              {likedPets.length > 0 
+                ? `You liked ${likedPets.length} pet${likedPets.length > 1 ? 's' : ''}!`
+                : 'Try adjusting your preferences to see more pets.'
+              }
+            </p>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto">
+    <div className="w-full max-w-md mx-auto">
       <Carousel
         opts={{
           align: "center",

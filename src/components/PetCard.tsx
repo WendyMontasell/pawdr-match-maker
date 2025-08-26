@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Heart, X } from 'lucide-react';
 import catImage from '@/assets/cat-sample.jpg';
 import dogImage from '@/assets/dog-sample.jpg';
@@ -48,20 +48,20 @@ const PetCard = ({ pet, onLike, onPass }: PetCardProps) => {
   const imageUrl = pet.species ? dogImage : catImage;
 
   return (
-    <Card className="w-full max-w-sm mx-auto bg-card rounded-2xl overflow-hidden border-0 shadow-lg">
+    <Card className="w-full max-w-sm mx-auto rounded-xl shadow-md overflow-hidden border">
       {/* Top Action Buttons */}
       <div className="flex justify-between items-center p-4 pb-0">
         <Button
           variant="ghost"
           size="sm"
-          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+          className="text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg"
         >
           Watch video
         </Button>
         <Button
           variant="ghost"
           size="sm"
-          className="text-sm font-medium text-muted-foreground hover:text-foreground"
+          className="text-sm font-medium text-muted-foreground hover:text-foreground rounded-lg"
         >
           View profile
         </Button>
@@ -79,10 +79,12 @@ const PetCard = ({ pet, onLike, onPass }: PetCardProps) => {
       </div>
 
       {/* Pet Info */}
-      <div className="p-4 space-y-3">
-        <h3 className="text-xl font-semibold text-foreground">
-          {pet.name}, {age}
-        </h3>
+      <CardContent className="p-4 space-y-3">
+        <div>
+          <h3 className="text-xl font-semibold text-foreground">
+            {pet.name}, {age}
+          </h3>
+        </div>
         
         <p className="text-sm text-muted-foreground leading-relaxed">
           {pet.description || `Meet ${pet.name}, a ${pet.species ? 'dog' : 'cat'} looking for their forever home.`}
@@ -91,25 +93,27 @@ const PetCard = ({ pet, onLike, onPass }: PetCardProps) => {
         <p className="text-sm text-muted-foreground">
           No allergies or special care needed.
         </p>
-      </div>
+      </CardContent>
 
       {/* Action Buttons */}
-      <div className="flex justify-between items-center p-4 pt-0">
+      <div className="flex gap-4 p-4 pt-0">
         <Button
-          size="lg"
           variant="outline"
-          className="w-16 h-16 rounded-full border-2 border-muted-foreground/20 bg-muted/50 hover:bg-destructive/10 hover:border-destructive/30"
+          size="lg"
+          className="flex-1 rounded-xl"
           onClick={() => onPass(pet.id)}
         >
-          <X className="w-6 h-6 text-muted-foreground" />
+          <X className="w-5 h-5 mr-2" />
+          Pass
         </Button>
         
         <Button
           size="lg"
-          className="w-16 h-16 rounded-full bg-primary hover:bg-primary-hover"
+          className="flex-1 rounded-xl"
           onClick={() => onLike(pet.id)}
         >
-          <Heart className="w-6 h-6 text-primary-foreground fill-primary-foreground" />
+          <Heart className="w-5 h-5 mr-2" />
+          Like
         </Button>
       </div>
     </Card>

@@ -1,6 +1,7 @@
 import { Logo } from '@/components/Logo';
 import { ProgressBar } from '@/components/ProgressBar';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useQuestionnaire } from '@/hooks/useQuestionnaire';
@@ -100,94 +101,101 @@ const QuestionnaireStep = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col p-6">
-      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col">
+      <div className="w-full max-w-md mx-auto flex-1 flex flex-col">
         {/* Header */}
-        <div className="text-center space-y-6 pt-8 pb-12">
+        <div className="text-center space-y-6 pt-8 pb-8">
           <Logo size={32} color="#FF4F7B" />
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium text-muted-foreground">
+          <div className="space-y-3">
+            <h3 className="text-base font-medium text-muted-foreground">
               Questionnaire
             </h3>
             <ProgressBar currentStep={currentStep} totalSteps={questions.length} />
           </div>
         </div>
 
-        {/* Question */}
-        <div className="flex-1 space-y-8">
-          <h2 className="text-xl font-semibold text-foreground text-center leading-relaxed">
-            {question.title}
-          </h2>
+        {/* Main Content Card */}
+        <Card className="flex-1 shadow-md">
+          <CardContent className="p-6 h-full flex flex-col">
+            {/* Question */}
+            <div className="flex-1 space-y-8">
+              <h2 className="text-xl font-semibold text-foreground text-center leading-relaxed">
+                {question.title}
+              </h2>
 
-          {/* Options */}
-          <div className="space-y-4">
-            {question.options.map((option, index) => {
-              const isSelected = selectedOption === index;
+              {/* Options */}
+              <div className="space-y-4">
+                {question.options.map((option, index) => {
+                  const isSelected = selectedOption === index;
+                  
+                  if (isImageQuestion && typeof option === 'object') {
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedOption(index)}
+                        className={`w-full p-4 rounded-xl border transition-all duration-200 ${
+                          isSelected 
+                            ? 'border-primary bg-accent shadow-md' 
+                            : 'border-input bg-card hover:bg-accent hover:border-primary shadow-sm'
+                        }`}
+                      >
+                        <div className="flex flex-col items-center space-y-3">
+                          <div className="w-20 h-20 rounded-xl overflow-hidden">
+                            <img 
+                              src={option.image} 
+                              alt={option.text}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <span className="font-medium text-foreground">
+                            {option.text}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  }
+
+                  return (
+                    <Button
+                      key={index}
+                      variant="option"
+                      onClick={() => setSelectedOption(index)}
+                      className={`w-full ${
+                        isSelected 
+                          ? 'border-primary bg-accent shadow-md' 
+                          : ''
+                      }`}
+                    >
+                      {option as string}
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="space-y-4 pt-6">
+              <Button 
+                size="lg" 
+                className="w-full"
+                onClick={handleNext}
+                disabled={selectedOption === null}
+              >
+                {isLastStep ? 'See candidates →' : 'Next question →'}
+              </Button>
               
-              if (isImageQuestion && typeof option === 'object') {
-                return (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedOption(index)}
-                    className={`w-full p-4 rounded-2xl border-2 transition-all duration-200 ${
-                      isSelected 
-                        ? 'border-primary bg-option-selected' 
-                        : 'border-option-border bg-background hover:bg-option-selected hover:border-primary'
-                    }`}
-                  >
-                    <div className="flex flex-col items-center space-y-3">
-                      <div className="w-20 h-20 rounded-xl overflow-hidden">
-                        <img 
-                          src={option.image} 
-                          alt={option.text}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <span className="font-medium text-foreground">
-                        {option.text}
-                      </span>
-                    </div>
-                  </button>
-                );
-              }
-
-              return (
+              <div className="text-center">
                 <Button
-                  key={index}
-                  variant="option"
-                  onClick={() => setSelectedOption(index)}
-                  className={`w-full ${
-                    isSelected 
-                      ? 'border-primary bg-option-selected' 
-                      : ''
-                  }`}
+                  variant="ghost"
+                  size="sm"
+                  className="text-muted-foreground hover:text-foreground text-sm"
+                  onClick={() => navigate('/onboarding')}
                 >
-                  {option as string}
+                  Save and finish later
                 </Button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="space-y-4 pt-8">
-          <Button 
-            size="lg" 
-            className="w-full h-14"
-            onClick={handleNext}
-            disabled={selectedOption === null}
-          >
-            {isLastStep ? 'See candidates →' : 'Next question →'}
-          </Button>
-          
-          <div className="text-center">
-            <button 
-              className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-              onClick={() => navigate('/onboarding')}
-            >
-              Save and finish later
-            </button>
-          </div>
-        </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

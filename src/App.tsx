@@ -20,7 +20,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Welcome />} />
-          <Route path="/onboarding" element={<OnboardingIntro />} />
+          <Route path="/onboarding-intro" element={<OnboardingIntro />} />
           <Route path="/questionnaire/:step" element={<QuestionnaireStep />} />
           <Route path="/matching" element={<Matching />} />
           <Route path="/dashboard" element={<Index />} />
