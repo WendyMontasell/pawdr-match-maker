@@ -18,6 +18,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['Open Sans', 'ui-sans-serif', 'system-ui'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -73,9 +76,12 @@ export default {
 				}
 			},
 			borderRadius: {
+				DEFAULT: '0.75rem', // rounded-xl as default
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				sm: 'calc(var(--radius) - 4px)',
+				xl: '0.75rem', // 12px
+				'2xl': '1rem'   // 16px
 			},
 			keyframes: {
 				'accordion-down': {

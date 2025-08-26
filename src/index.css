@@ -8,50 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Pawdr Brand Colors */
-    --background: 0 0% 98%;
-    --foreground: 220 13% 18%;
+    /* New Pawdr Design System Colors */
+    --background: 48 100% 97%;
+    --foreground: 0 0% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 13% 18%;
+    --card-foreground: 0 0% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 13% 18%;
+    --popover-foreground: 0 0% 16%;
 
-    /* Pawdr Pink Primary */
-    --primary: 300 100% 70%;
+    /* Primary: #FF4F7B */
+    --primary: 342 100% 65%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 300 100% 65%;
+    --primary-hover: 342 100% 60%;
 
-    /* Soft Secondary */
-    --secondary: 240 5% 96%;
-    --secondary-foreground: 220 13% 18%;
+    /* Secondary: #6FA141 */
+    --secondary: 96 46% 46%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Subtle Muted */
-    --muted: 240 5% 96%;
+    /* Muted tones */
+    --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
 
-    /* Gentle Accent */
-    --accent: 300 100% 95%;
-    --accent-foreground: 300 100% 30%;
+    /* Accent */
+    --accent: 342 100% 95%;
+    --accent-foreground: 342 100% 30%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Soft Borders */
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 300 100% 70%;
+    /* Borders and inputs */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 342 100% 65%;
 
     /* Progress & States */
-    --progress-bg: 240 5% 90%;
-    --progress-fill: 300 100% 70%;
+    --progress-bg: 220 14% 95%;
+    --progress-fill: 342 100% 65%;
     
     /* Interactive States */
-    --option-border: 300 60% 80%;
-    --option-selected: 300 100% 95%;
+    --option-border: 342 60% 80%;
+    --option-selected: 342 100% 95%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -71,39 +71,39 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 220 13% 18%;
+    --background: 0 0% 9%;
     --foreground: 0 0% 98%;
 
-    --card: 220 13% 18%;
+    --card: 0 0% 11%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 220 13% 18%;
+    --popover: 0 0% 11%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 300 100% 70%;
+    --primary: 342 100% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 4% 16%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 96 46% 46%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 4% 16%;
+    --muted: 0 0% 15%;
     --muted-foreground: 240 5% 65%;
 
-    --accent: 300 100% 25%;
+    --accent: 342 100% 25%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62% 31%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 4% 16%;
-    --input: 240 4% 16%;
-    --ring: 300 100% 70%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 342 100% 65%;
     
-    --progress-bg: 240 4% 16%;
-    --progress-fill: 300 100% 70%;
+    --progress-bg: 0 0% 15%;
+    --progress-fill: 342 100% 65%;
     
-    --option-border: 300 60% 40%;
-    --option-selected: 300 100% 15%;
+    --option-border: 342 60% 40%;
+    --option-selected: 342 100% 15%;
   }
 }
 
@@ -113,6 +113,23 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  /* Typography System */
+  h1 { @apply text-2xl font-semibold tracking-tight; }
+  h2 { @apply text-xl font-semibold tracking-tight; }
+  h3 { @apply text-lg font-medium tracking-tight; }
+  h4 { @apply text-base font-medium tracking-tight; }
+  h5 { @apply text-sm font-medium tracking-tight; }
+  h6 { @apply text-sm font-medium tracking-tight; }
+  
+  p { @apply text-base leading-relaxed; }
+  small { @apply text-sm; }
+  
+  /* Global component defaults */
+  .btn { @apply rounded-xl px-4 py-2 font-medium transition-colors; }
+  .card { @apply rounded-xl border bg-card text-card-foreground shadow-sm; }
+  .input { @apply rounded-xl border border-input bg-background px-3 py-2; }
 }
