@@ -39,32 +39,6 @@ const Welcome = () => {
             </Button>
           </CardContent>
         </Card>
-
-        {/* Secondary Content */}
-        <Card className="mt-6 shadow-md">
-          <CardContent className="p-6">
-            {/* Header */}
-            <div className="flex items-center justify-center mb-4">
-              <Logo size={32} color="#FF4F7B" />
-            </div>
-            
-            <div className="text-center space-y-3">
-              <h2 className="text-lg font-medium">Ready to find your match?</h2>
-              <p className="text-sm text-muted-foreground">
-                Take our quick questionnaire to get personalized pet recommendations.
-              </p>
-              
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full"
-                onClick={handleGetStarted}
-              >
-                Start Questionnaire
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
