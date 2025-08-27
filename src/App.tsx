@@ -8,6 +8,8 @@ import Welcome from "./pages/Welcome";
 import OnboardingIntro from "./pages/OnboardingIntro";
 import QuestionnaireStep from "./pages/QuestionnaireStep";
 import Matching from "./pages/Matching";
+import Matches from "./pages/Matches";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +26,8 @@ const App = () => (
           <Route path="/questionnaire/:step" element={<QuestionnaireStep />} />
           <Route path="/matching" element={<Matching />} />
           <Route path="/dashboard" element={<Index />} />
+          <Route path="/matches" element={<Matches />} />
+          <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

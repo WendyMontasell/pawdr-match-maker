@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Pet } from '@/components/PetCard';
+import BottomNavigation from '@/components/BottomNavigation';
 
 const Index = () => {
   const location = useLocation();
@@ -20,55 +21,61 @@ const Index = () => {
     navigate('/');
   };
 
+  const handleGetStarted = () => {
+    navigate('/onboarding-intro');
+  };
+
   return (
-    <div className="min-h-screen bg-background flex flex-col p-6">
+    <div className="min-h-screen bg-background pb-20">
       {/* Header */}
-      <div className="w-full max-w-md mx-auto pb-6">
-        <Card className="shadow-md">
-          <CardContent className="p-4 flex items-center justify-between">
-            <Logo size={24} color="#FF4F7B" />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleStartOver}
-            >
-              Start Over
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+        <div className="container flex h-16 items-center justify-between px-4">
+          <Logo size={32} color="#3B82F6" />
+          <Button variant="outline" size="sm" onClick={handleStartOver}>
+            Start Over
+          </Button>
+        </div>
+      </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center">
+      <main className="container px-4 py-6">
         {pets.length > 0 ? (
-          <div className="w-full">
-            <div className="text-center mb-6">
-              <Card className="max-w-md mx-auto shadow-md">
-                <CardContent className="p-6">
-                  <h1 className="text-xl font-semibold mb-2">Meet Your Matches!</h1>
-                  <p className="text-sm text-muted-foreground">
-                    Swipe through pets that match your preferences.
-                  </p>
-                </CardContent>
-              </Card>
+          <div className="space-y-6">
+            {/* Title */}
+            <div className="text-center space-y-2">
+              <h1 className="text-2xl font-bold">Meet Your Matches!</h1>
+              <p className="text-muted-foreground">
+                Swipe through your personalized pet recommendations
+              </p>
             </div>
+
+            {/* Pet Swiper */}
             <PetSwiper pets={pets} />
           </div>
         ) : (
-          <div className="w-full max-w-md mx-auto">
-            <Card className="shadow-md">
-              <CardContent className="p-8 text-center space-y-6">
-                <Logo size={64} color="#FF4F7B" />
-                <div className="space-y-4">
-                  <h1 className="text-2xl font-semibold">Welcome to Pawdr!</h1>
-                  <p className="text-muted-foreground">
-                    Start your journey to find the perfect pet companion.
-                  </p>
-                </div>
+          <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-8">
+            {/* Logo */}
+            <div className="text-center space-y-4">
+              <Logo size={80} color="#3B82F6" />
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold">Welcome to Pawdr!</h1>
+                <p className="text-lg text-muted-foreground max-w-md">
+                  Find your perfect furry companion through our personalized matching system
+                </p>
+              </div>
+            </div>
+
+            {/* CTA Card */}
+            <Card className="w-full max-w-md shadow-md">
+              <CardContent className="p-6 text-center space-y-4">
+                <h2 className="text-xl font-semibold">Ready to find your match?</h2>
+                <p className="text-muted-foreground">
+                  Take our quick questionnaire to get personalized pet recommendations
+                </p>
                 <Button 
                   size="lg" 
                   className="w-full"
-                  onClick={handleStartOver}
+                  onClick={handleGetStarted}
                 >
                   Find My Match
                 </Button>
@@ -76,7 +83,9 @@ const Index = () => {
             </Card>
           </div>
         )}
-      </div>
+      </main>
+
+      {pets.length > 0 && <BottomNavigation />}
     </div>
   );
 };
