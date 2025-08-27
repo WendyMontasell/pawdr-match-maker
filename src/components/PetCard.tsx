@@ -13,6 +13,7 @@ interface Pet {
   energy_level: number;
   good_with_kids: number;
   good_with_pets: number;
+  picture?: string | null;
 }
 
 interface PetCardProps {
@@ -44,8 +45,8 @@ const PetCard = ({ pet, onLike, onPass }: PetCardProps) => {
 
   const age = getAge();
 
-  // Mock image - in a real app, this would come from the database
-  const imageUrl = pet.species ? dogImage : catImage;
+  // Use database picture or fallback to species-based image
+  const imageUrl = pet.picture || (pet.species ? dogImage : catImage);
 
   return (
     <Card className="w-full max-w-sm mx-auto rounded-xl shadow-md overflow-hidden border">
