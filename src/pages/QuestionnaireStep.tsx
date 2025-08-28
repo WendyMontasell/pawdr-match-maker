@@ -56,6 +56,12 @@ const QuestionnaireStep = () => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const { responses, updateResponse, isComplete } = useQuestionnaire();
   
+  // Validate step and redirect if invalid
+  if (currentStep < 1 || currentStep > questions.length) {
+    navigate('/questionnaire/1');
+    return null;
+  }
+  
   const question = questions[currentStep - 1];
   const isLastStep = currentStep === questions.length;
   
