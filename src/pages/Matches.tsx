@@ -63,7 +63,7 @@ const Matches = () => {
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
         <div className="container flex h-16 items-center justify-between px-4">
-          <Logo size={32} color="#3B82F6" />
+          <Logo size={32} color="#FF4F7B" />
           <h1 className="text-xl font-semibold">Your Matches</h1>
           <div className="w-8" /> {/* Spacer for centering */}
         </div>

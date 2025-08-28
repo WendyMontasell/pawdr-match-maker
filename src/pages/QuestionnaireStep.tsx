@@ -78,6 +78,15 @@ const QuestionnaireStep = () => {
     // Update the response for this question
     updateResponse(currentStep, selectedOption);
     
+    console.log('Updated questionnaire response:', {
+      question: currentStep,
+      selectedOption,
+      questionText: question.title,
+      selectedAnswer: typeof question.options[selectedOption] === 'string' 
+        ? question.options[selectedOption]
+        : question.options[selectedOption].text
+    });
+    
     if (isLastStep) {
       // Save all responses to database and navigate to matching
       try {

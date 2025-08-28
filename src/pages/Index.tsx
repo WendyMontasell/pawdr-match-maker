@@ -43,7 +43,7 @@ const Index = () => {
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
         <div className="container flex h-16 items-center justify-between px-4">
-          <Logo size={32} color="#3B82F6" />
+          <Logo size={32} color="#FF4F7B" />
           <Button variant="outline" size="sm" onClick={handleStartOver}>
             Start Over
           </Button>
@@ -69,7 +69,7 @@ const Index = () => {
           <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-8">
             {/* Logo */}
             <div className="text-center space-y-4">
-              <Logo size={80} color="#3B82F6" />
+              <Logo size={80} color="#FF4F7B" />
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold">Welcome to Pawdr!</h1>
                 <p className="text-lg text-muted-foreground max-w-md">
