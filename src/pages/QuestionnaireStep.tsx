@@ -186,7 +186,7 @@ const QuestionnaireStep = () => {
             </div>
 
             {/* Footer */}
-            <div className="space-y-4 pt-6">
+            <div className="pt-6">
               <Button 
                 size="lg" 
                 className="w-full"
@@ -195,17 +195,6 @@ const QuestionnaireStep = () => {
               >
                 {isLastStep ? 'See candidates →' : 'Next question →'}
               </Button>
-              
-              <div className="text-center">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-muted-foreground hover:text-foreground text-sm"
-                  onClick={() => navigate('/onboarding')}
-                >
-                  Save and finish later
-                </Button>
-              </div>
             </div>
           </CardContent>
         </Card>
