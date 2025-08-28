@@ -12,8 +12,15 @@ const BottomNavigation = () => {
     { id: 'settings', label: 'Settings', icon: Settings, path: '/settings' },
   ];
 
-  const handleTabClick = (path: string) => {
-    navigate(path);
+  const handleTabClick = (path: string, tabId: string) => {
+    if (tabId === 'swiper') {
+      // Load previously matched pets from localStorage for swiper
+      const savedMatchedPets = localStorage.getItem('matchedPets');
+      const matchedPets = savedMatchedPets ? JSON.parse(savedMatchedPets) : [];
+      navigate('/dashboard', { state: { matchedPets } });
+    } else {
+      navigate(path);
+    }
   };
 
   return (
@@ -26,7 +33,7 @@ const BottomNavigation = () => {
           return (
             <button
               key={tab.id}
-              onClick={() => handleTabClick(tab.path)}
+              onClick={() => handleTabClick(tab.path, tab.id)}
               className={cn(
                 "flex flex-col items-center justify-center py-2 px-3 rounded-lg transition-colors",
                 "min-w-[60px]",

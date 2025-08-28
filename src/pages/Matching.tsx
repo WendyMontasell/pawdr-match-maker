@@ -18,6 +18,9 @@ const Matching = () => {
           const pets = await findMatchingPets(responses);
           setMatchingPets(pets);
           
+          // Save matched pets to localStorage for later use
+          localStorage.setItem('matchedPets', JSON.stringify(pets));
+          
           // Navigate after finding matches
           setTimeout(() => {
             navigate('/dashboard', { state: { matchedPets: pets } });
