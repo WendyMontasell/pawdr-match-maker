@@ -1,18 +1,26 @@
 import { useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { PetCard, Pet } from '@/components/PetCard';
+import { useNavigate } from 'react-router-dom';
 
 interface PetSwiperProps {
   pets: Pet[];
+  onPetLiked?: (pet: Pet) => void;
 }
 
-const PetSwiper = ({ pets }: PetSwiperProps) => {
+const PetSwiper = ({ pets, onPetLiked }: PetSwiperProps) => {
+  const navigate = useNavigate();
   const [likedPets, setLikedPets] = useState<string[]>([]);
   const [passedPets, setPassedPets] = useState<string[]>([]);
 
   const handleLike = (petId: string) => {
     setLikedPets(prev => [...prev, petId]);
+    const likedPet = pets.find(pet => pet.id === petId);
+    if (likedPet && onPetLiked) {
+      onPetLiked(likedPet);
+    }
     console.log(`Liked pet: ${petId}`);
   };
 
@@ -26,6 +34,10 @@ const PetSwiper = ({ pets }: PetSwiperProps) => {
     pet => !likedPets.includes(pet.id) && !passedPets.includes(pet.id)
   );
 
+  const handleViewMatches = () => {
+    navigate('/matches');
+  };
+
   if (activePets.length === 0) {
     return (
       <div className="w-full max-w-md mx-auto">
@@ -38,6 +50,14 @@ const PetSwiper = ({ pets }: PetSwiperProps) => {
                 : 'Try adjusting your preferences to see more pets.'
               }
             </p>
+            {likedPets.length > 0 && (
+              <Button 
+                onClick={handleViewMatches}
+                className="w-full"
+              >
+                See All Matches
+              </Button>
+            )}
           </CardContent>
         </Card>
       </div>

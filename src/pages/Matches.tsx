@@ -24,9 +24,15 @@ const Matches = () => {
   const [matches, setMatches] = useState<Pet[]>([]);
 
   useEffect(() => {
-    // Get matches from location state (from the matching flow)
+    // Get matches from location state (from the matching flow) or from localStorage (liked pets)
     if (location.state?.matchedPets) {
       setMatches(location.state.matchedPets);
+    } else {
+      // Load liked pets from localStorage
+      const savedLikedPets = localStorage.getItem('likedPets');
+      if (savedLikedPets) {
+        setMatches(JSON.parse(savedLikedPets));
+      }
     }
   }, [location.state]);
 

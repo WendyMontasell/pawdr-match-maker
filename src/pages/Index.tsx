@@ -11,11 +11,24 @@ const Index = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [pets, setPets] = useState<Pet[]>([]);
+  const [likedPets, setLikedPets] = useState<Pet[]>([]);
 
   useEffect(() => {
     const matchedPets = location.state?.matchedPets || [];
     setPets(matchedPets);
+    // Load liked pets from localStorage
+    const savedLikedPets = localStorage.getItem('likedPets');
+    if (savedLikedPets) {
+      setLikedPets(JSON.parse(savedLikedPets));
+    }
   }, [location.state]);
+
+  const handlePetLiked = (pet: Pet) => {
+    const updatedLikedPets = [...likedPets, pet];
+    setLikedPets(updatedLikedPets);
+    // Save to localStorage
+    localStorage.setItem('likedPets', JSON.stringify(updatedLikedPets));
+  };
 
   const handleStartOver = () => {
     navigate('/');
@@ -50,7 +63,7 @@ const Index = () => {
             </div>
 
             {/* Pet Swiper */}
-            <PetSwiper pets={pets} />
+            <PetSwiper pets={pets} onPetLiked={handlePetLiked} />
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-8">
