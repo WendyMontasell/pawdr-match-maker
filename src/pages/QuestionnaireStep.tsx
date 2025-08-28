@@ -57,12 +57,19 @@ const QuestionnaireStep = () => {
   const { responses, updateResponse, isComplete } = useQuestionnaire();
   
   // Validate step and redirect if invalid
-  if (currentStep < 1 || currentStep > questions.length) {
+  if (isNaN(currentStep) || currentStep < 1 || currentStep > questions.length) {
     navigate('/questionnaire/1');
     return null;
   }
   
   const question = questions[currentStep - 1];
+  
+  // Additional safety check for question existence
+  if (!question) {
+    navigate('/questionnaire/1');
+    return null;
+  }
+  
   const isLastStep = currentStep === questions.length;
   
   const handleNext = async () => {
