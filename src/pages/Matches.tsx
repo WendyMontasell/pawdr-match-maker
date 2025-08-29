@@ -112,75 +112,73 @@ const Matches = () => {
 
             {matches.map((pet) => (
               <Card key={pet.id} className="shadow-md">
-                <CardContent className="p-0">
-                   <div className="flex gap-4 p-4">
-                     {/* Pet Image */}
-                     <div className="flex-shrink-0">
-                       <img
-                         src={getImageSrc(pet)}
-                         alt={`${pet.name} the ${getSpeciesName(pet.species)}`}
-                         className="w-24 h-24 rounded-xl object-cover"
-                       />
-                     </div>
+                <CardContent className="p-3">
+                  <div className="flex gap-3">
+                    {/* Pet Image */}
+                    <div className="flex-shrink-0">
+                      <img
+                        src={getImageSrc(pet)}
+                        alt={`${pet.name} the ${getSpeciesName(pet.species)}`}
+                        className="w-20 h-20 rounded-lg object-cover"
+                      />
+                    </div>
 
-                     {/* Pet Info */}
-                     <div className="flex-1 min-w-0">
-                       <div className="flex items-start justify-between mb-2">
-                         <div>
-                           <h3 className="text-lg font-medium text-foreground">
-                             {pet.name}
-                           </h3>
-                           <p className="text-sm text-muted-foreground">
-                             {getSpeciesName(pet.species)} • {getRandomAge()} years old
-                           </p>
-                         </div>
-                       </div>
+                    {/* Pet Info */}
+                    <div className="flex-1 min-w-0 space-y-2">
+                      <div>
+                        <h3 className="text-base font-medium text-foreground leading-tight">
+                          {pet.name}
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          {getSpeciesName(pet.species)} • {getRandomAge()} years old
+                        </p>
+                      </div>
 
-                       {/* Pet Description */}
-                       <p className="text-sm text-foreground mb-3 line-clamp-2">
-                         {pet.description}
-                       </p>
+                      {/* Pet Description */}
+                      <p className="text-xs text-foreground line-clamp-2 leading-relaxed">
+                        {pet.description}
+                      </p>
 
-                       {/* Pet Characteristics */}
-                       <div className="flex flex-wrap gap-1 mb-3">
-                         <Badge variant="secondary" className="text-xs">
-                           {getEnergyLevel(pet.energy_level)}
-                         </Badge>
-                         <Badge variant="secondary" className="text-xs">
-                           Good with kids: {pet.good_with_kids}/3
-                         </Badge>
-                         <Badge variant="secondary" className="text-xs">
-                           Good with pets: {pet.good_with_pets}/3
-                         </Badge>
-                         {hasSpecialNeeds(pet.ease_of_care) && (
-                           <Badge variant="destructive" className="text-xs">
-                             Special Needs
-                           </Badge>
-                         )}
-                       </div>
+                      {/* Pet Characteristics */}
+                      <div className="flex flex-wrap gap-1">
+                        <Badge variant="secondary" className="text-xs py-0 px-2 h-5">
+                          {getEnergyLevel(pet.energy_level)}
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs py-0 px-2 h-5">
+                          Kids: {pet.good_with_kids}/3
+                        </Badge>
+                        <Badge variant="secondary" className="text-xs py-0 px-2 h-5">
+                          Pets: {pet.good_with_pets}/3
+                        </Badge>
+                        {hasSpecialNeeds(pet.ease_of_care) && (
+                          <Badge variant="destructive" className="text-xs py-0 px-2 h-5">
+                            Special Needs
+                          </Badge>
+                        )}
+                      </div>
 
-                       {/* Action Buttons */}
-                       <div className="flex gap-2">
-                         <Button
-                           variant="outline"
-                           size="sm"
-                           className="flex-1"
-                           onClick={() => handleViewDetails(pet)}
-                         >
-                           <Eye className="w-4 h-4 mr-2" />
-                           View Details
-                         </Button>
-                         <Button
-                           size="sm"
-                           className="flex-1"
-                           onClick={() => handleScheduleMeeting(pet)}
-                         >
-                           <Calendar className="w-4 h-4 mr-2" />
-                           Schedule Meeting
-                         </Button>
-                       </div>
-                     </div>
-                   </div>
+                      {/* Action Buttons */}
+                      <div className="flex gap-1.5 pt-1">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1 h-8 text-xs"
+                          onClick={() => handleViewDetails(pet)}
+                        >
+                          <Eye className="w-3 h-3 mr-1" />
+                          Details
+                        </Button>
+                        <Button
+                          size="sm"
+                          className="flex-1 h-8 text-xs"
+                          onClick={() => handleScheduleMeeting(pet)}
+                        >
+                          <Calendar className="w-3 h-3 mr-1" />
+                          Meet
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
