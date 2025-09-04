@@ -9,6 +9,7 @@ import OnboardingIntro from "./pages/OnboardingIntro";
 import QuestionnaireStep from "./pages/QuestionnaireStep";
 import Matching from "./pages/Matching";
 import Matches from "./pages/Matches";
+import PetDetails from "./pages/PetDetails";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/matching" element={<Matching />} />
           <Route path="/dashboard" element={<Index />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/pet/:id" element={<PetDetails />} />
           <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

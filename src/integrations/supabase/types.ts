@@ -55,6 +55,7 @@ export type Database = {
           good_with_kids: number | null
           good_with_pets: number | null
           id: string
+          long_description: string | null
           name: string
           picture: string | null
           species: boolean | null
@@ -66,6 +67,7 @@ export type Database = {
           good_with_kids?: number | null
           good_with_pets?: number | null
           id?: string
+          long_description?: string | null
           name: string
           picture?: string | null
           species?: boolean | null
@@ -77,6 +79,7 @@ export type Database = {
           good_with_kids?: number | null
           good_with_pets?: number | null
           id?: string
+          long_description?: string | null
           name?: string
           picture?: string | null
           species?: boolean | null

@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Eye, Calendar } from "lucide-react";
 import BottomNavigation from "@/components/BottomNavigation";
 import { Logo } from "@/components/Logo";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 interface Pet {
@@ -21,6 +21,7 @@ interface Pet {
 
 const Matches = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [matches, setMatches] = useState<Pet[]>([]);
 
   useEffect(() => {
@@ -37,8 +38,7 @@ const Matches = () => {
   }, [location.state]);
 
   const handleViewDetails = (pet: Pet) => {
-    // TODO: Navigate to pet details page or open modal
-    console.log('View details for:', pet);
+    navigate(`/pet/${pet.id}`);
   };
 
   const handleScheduleMeeting = (pet: Pet) => {
