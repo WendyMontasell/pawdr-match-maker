@@ -6,6 +6,9 @@ import BottomNavigation from "@/components/BottomNavigation";
 import { Logo } from "@/components/Logo";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import catSample from "@/assets/cat-sample.jpg";
+import dogSample from "@/assets/dog-sample.jpg";
+import eitherSample from "@/assets/either-sample.jpg";
 
 interface Pet {
   id: string;
@@ -50,12 +53,12 @@ const Matches = () => {
     if (pet.picture) {
       return pet.picture;
     }
-    // Fallback to species-based images
+    // Fallback to species-based images using proper imports
     return pet.species === false 
-      ? '/src/assets/cat-sample.jpg'
+      ? catSample
       : pet.species === true
-      ? '/src/assets/dog-sample.jpg'
-      : '/src/assets/either-sample.jpg';
+      ? dogSample
+      : eitherSample;
   };
 
   const getSpeciesName = (species: boolean) => {
@@ -78,9 +81,10 @@ const Matches = () => {
     return easeOfCare >= 3;
   };
 
-  const getRandomAge = () => {
-    // Generate a random age between 1-8 years for display purposes
-    return Math.floor(Math.random() * 8) + 1;
+  const getRandomAge = (petId: string) => {
+    // Generate a consistent age based on pet ID to avoid re-renders
+    const seed = petId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return (seed % 8) + 1;
   };
 
   return (
@@ -136,7 +140,7 @@ const Matches = () => {
                           {pet.name}
                         </h3>
                         <p className="text-xs text-muted-foreground">
-                          {getSpeciesName(pet.species)} • {getRandomAge()} years old
+                          {getSpeciesName(pet.species)} • {getRandomAge(pet.id)} years old
                         </p>
                       </div>
 

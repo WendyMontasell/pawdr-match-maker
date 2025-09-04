@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import catSample from "@/assets/cat-sample.jpg";
+import dogSample from "@/assets/dog-sample.jpg";
+import eitherSample from "@/assets/either-sample.jpg";
 
 interface Pet {
   id: string;
@@ -78,10 +81,10 @@ const PetDetails = () => {
       return pet.picture;
     }
     return pet.species === false 
-      ? '/src/assets/cat-sample.jpg'
+      ? catSample
       : pet.species === true
-      ? '/src/assets/dog-sample.jpg'
-      : '/src/assets/either-sample.jpg';
+      ? dogSample
+      : eitherSample;
   };
 
   const getSpeciesName = (species: boolean) => {
@@ -104,8 +107,10 @@ const PetDetails = () => {
     return easeOfCare >= 3;
   };
 
-  const getRandomAge = () => {
-    return Math.floor(Math.random() * 8) + 1;
+  const getRandomAge = (petId: string) => {
+    // Generate a consistent age based on pet ID to avoid re-renders
+    const seed = petId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return (seed % 8) + 1;
   };
 
   if (loading) {
@@ -187,7 +192,7 @@ const PetDetails = () => {
               <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
                 <span>{getSpeciesName(pet.species)}</span>
                 <span>•</span>
-                <span>{pet.age || getRandomAge()} years old</span>
+                <span>{pet.age || getRandomAge(pet.id)} years old</span>
                 <span>•</span>
                 <MapPin className="h-4 w-4" />
                 <span>Local Shelter</span>
