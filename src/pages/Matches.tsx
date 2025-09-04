@@ -63,9 +63,15 @@ const Matches = () => {
   };
 
   const getEnergyLevel = (level: number) => {
-    if (level >= 3) return 'High Energy';
-    if (level >= 2) return 'Medium Energy';
-    return 'Low Energy';
+    if (level >= 3) return { text: 'High Energy', variant: 'success' as const };
+    if (level >= 2) return { text: 'Medium Energy', variant: 'warning' as const };
+    return { text: 'Low Energy', variant: 'danger' as const };
+  };
+
+  const getCompatibilityLevel = (level: number, type: string) => {
+    if (level >= 3) return { text: 'Good', variant: 'success' as const };
+    if (level >= 2) return { text: 'Will Take Time', variant: 'warning' as const };
+    return { text: 'Bad', variant: 'danger' as const };
   };
 
   const hasSpecialNeeds = (easeOfCare: number) => {
@@ -141,17 +147,17 @@ const Matches = () => {
 
                       {/* Pet Characteristics */}
                       <div className="flex flex-wrap gap-1">
-                        <Badge variant="secondary" className="text-xs py-0 px-2 h-5">
-                          {getEnergyLevel(pet.energy_level)}
+                        <Badge variant={getEnergyLevel(pet.energy_level).variant} className="text-xs py-0 px-2 h-5">
+                          {getEnergyLevel(pet.energy_level).text}
                         </Badge>
-                        <Badge variant="secondary" className="text-xs py-0 px-2 h-5">
-                          Kids: {pet.good_with_kids}/3
+                        <Badge variant={getCompatibilityLevel(pet.good_with_kids, 'Kids').variant} className="text-xs py-0 px-2 h-5">
+                          Kids: {getCompatibilityLevel(pet.good_with_kids, 'Kids').text}
                         </Badge>
-                        <Badge variant="secondary" className="text-xs py-0 px-2 h-5">
-                          Pets: {pet.good_with_pets}/3
+                        <Badge variant={getCompatibilityLevel(pet.good_with_pets, 'Pets').variant} className="text-xs py-0 px-2 h-5">
+                          Pets: {getCompatibilityLevel(pet.good_with_pets, 'Pets').text}
                         </Badge>
                         {hasSpecialNeeds(pet.ease_of_care) && (
-                          <Badge variant="destructive" className="text-xs py-0 px-2 h-5">
+                          <Badge variant="danger" className="text-xs py-0 px-2 h-5">
                             Special Needs
                           </Badge>
                         )}
