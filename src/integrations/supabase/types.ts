@@ -50,29 +50,35 @@ export type Database = {
       Pets: {
         Row: {
           description: string | null
+          ease_of_care: number | null
           energy_level: number | null
           good_with_kids: number | null
           good_with_pets: number | null
           id: string
           name: string
+          picture: string | null
           species: boolean | null
         }
         Insert: {
           description?: string | null
+          ease_of_care?: number | null
           energy_level?: number | null
           good_with_kids?: number | null
           good_with_pets?: number | null
           id?: string
           name: string
+          picture?: string | null
           species?: boolean | null
         }
         Update: {
           description?: string | null
+          ease_of_care?: number | null
           energy_level?: number | null
           good_with_kids?: number | null
           good_with_pets?: number | null
           id?: string
           name?: string
+          picture?: string | null
           species?: boolean | null
         }
         Relationships: []
